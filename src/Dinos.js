@@ -6,6 +6,11 @@ class Dinos extends React.Component{
     constructor(){
         super()
         this.state = {
+            name:"",
+            height:"",
+            weight:"",
+            era:"",
+            diet:"",
             dinosaurs:[
             {name: 'Parasaurolophus', height:'16ft', weight:'2268 kg', era:'Late Cretaceous', diet: 'Herbivore'},
 
@@ -23,17 +28,23 @@ class Dinos extends React.Component{
             ]
         }
         this.deleteDino = this.deleteDino.bind(this);
-        // this.handleChange = this.handleChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     } // ends constructor 
 
-    // handleChange(event) {
-    //     this.setState({value: event.name});
-    // }
+    handleChange(event) {
+        //console.log(event.target.value)
+        const name = event.target.name;
+        this.setState({
+        [name]: event.target.value
+        });
+        // this.setState({value: event.name});
+    }
 
     handleSubmit(event) {
         event.preventDefault();
-        let dummyDino = {name: 'Spinosaurus', height: '9ft', weight: '2000 kg', era: 'Pre Jesus', diet: 'Light Salad'}
+        // let dummyDino = {name: 'Spinosaurus', height: '9ft', weight: '2000 kg', era: 'Pre Jesus', diet: 'Light Salad'}
+        let dummyDino = {name: this.state.name, height: this.state.height, weight: this.state.weight, era: this.state.era, diet: this.state.diet}
         //duplicate array
         let theDinos = this.state.dinosaurs.slice()
         theDinos.push(dummyDino)
@@ -66,27 +77,27 @@ class Dinos extends React.Component{
                 <Form>
                     <FormGroup>
                         <Label for="dinoName">Name of Dino</Label>
-                        <Input type="text" id="dinoName" placeholder="Spinosaurus" />
+                        <Input type="text" name="name" id="dinoName" placeholder="Spinosaurus" onChange={this.handleChange} />
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="dinoHeight">Height</Label>
-                        <Input type="text" id="dinoHeight" placeholder="11 ft" />
+                        <Input type="text" name="height" id="dinoHeight" placeholder="11 ft" onChange={this.handleChange}/>
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="dinoWeight">Weight</Label>
-                        <Input type="text" id="dinoWeight" placeholder="1000 kg" />
+                        <Input type="text" name="weight" id="dinoWeight" placeholder="1000 kg" onChange={this.handleChange} />
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="dinoEra">Era</Label>
-                        <Input type="text" id="dinoEra" placeholder="Late Jurassic" />
+                        <Input type="text" name="era" id="dinoEra" placeholder="Late Jurassic" onChange={this.handleChange} />
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="dinoDiet">Diet</Label>
-                        <Input type="text" id="dinoDiet" placeholder="Mostly Beats" />
+                        <Input type="text" name="diet" id="dinoDiet" placeholder="Mostly Beats" onChange={this.handleChange} />
                     </FormGroup>
                 </Form>
                 <button onClick={this.handleSubmit}>Submit</button>
