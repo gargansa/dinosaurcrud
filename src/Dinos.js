@@ -4,7 +4,6 @@ import React from 'react';
 class Dinos extends React.Component{
     constructor(){
         super()
-        console.log("hello")
         this.state = {
             dinosaurs:[
             {name: 'Parasaurolophus', height:'16ft', weight:'2268 kg', era:'Late Cretaceous', diet: 'Herbivore'},
@@ -20,26 +19,27 @@ class Dinos extends React.Component{
             {name: 'Tyrannosaurus', height: '12ft', weight: '7257 kg', era: 'Late Cretaceous', diet: 'Carnivore'},
             
             {name: 'Velociraptor', height: '2ft', weight: '15 kg', era: 'Late Cretaceous', diet: 'Carnivore'}
-        ]
+            ]
+        }
+        this.deleteDino = this.deleteDino.bind(this);
+    } // ends constructor 
+    deleteDino(name){
+       // e.persist()
+        console.log(name)
+        
+        // this.setState({
+        //     // name:this.state.dinosaur.splice(0,1)
+        // })
     }
-       
-    
-
-    console.log(this.state.dinosaurs);
-    // this.dinosdinosaurs.map((item)=>{
-    //     console.log(item)
-    // })
-}
     render(){
         this.dinoNames = this.state.dinosaurs.map((item)=>
-          <li key={item.name}>{item.name}</li>
+          <li key={item.name}>{item.name}<button onClick={()=>{this.deleteDino(item.name)}}>Delete</button></li>
       )
         return (
             <div>
                 <ul>{this.dinoNames}</ul>
             </div>
         );
-    
 }
 };
 
