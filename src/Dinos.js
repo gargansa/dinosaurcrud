@@ -25,12 +25,13 @@ class Dinos extends React.Component{
     } // ends constructor 
     deleteDino(name){
        // e.persist()
-        console.log(name)
-        
-        // this.setState({
-        //     // name:this.state.dinosaur.splice(0,1)
-        // })
+       let newDinos = this.state.dinosaurs.filter(dinosaur => dinosaur.name !== name)
+        console.log(newDinos)
+        this.setState({dinosaurs: newDinos})
+    
     }
+
+
     render(){
         this.dinoNames = this.state.dinosaurs.map((item)=>
           <li key={item.name}>{item.name}<button onClick={()=>{this.deleteDino(item.name)}}>Delete</button></li>
