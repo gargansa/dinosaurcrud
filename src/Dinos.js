@@ -5,7 +5,8 @@ class Dinos extends React.Component{
     constructor(){
         super()
         console.log("hello")
-        this.dinos = {dinosaurs: [
+        this.state = {
+            dinosaurs:[
             {name: 'Parasaurolophus', height:'16ft', weight:'2268 kg', era:'Late Cretaceous', diet: 'Herbivore'},
 
             {name: 'Brachiosaurus', height:'31ft', weight:'35000 kg', era: 'Late Jurassic', diet:'Herbivore'},
@@ -18,17 +19,24 @@ class Dinos extends React.Component{
             
             {name: 'Tyrannosaurus', height: '12ft', weight: '7257 kg', era: 'Late Cretaceous', diet: 'Carnivore'},
             
-            {name: 'Velociraptor', height: '2ft', weight: '15 kg', era: 'Late Cretaceous', diet: 'Carnivore'}]
+            {name: 'Velociraptor', height: '2ft', weight: '15 kg', era: 'Late Cretaceous', diet: 'Carnivore'}
+        ]
     }
-    console.log(this.dinos);
+       
+    
+
+    console.log(this.state.dinosaurs);
     // this.dinosdinosaurs.map((item)=>{
     //     console.log(item)
     // })
 }
     render(){
+        this.dinoNames = this.state.dinosaurs.map((item)=>
+          <li key={item.name}>{item.name}</li>
+      )
         return (
             <div>
-                dinos
+                <ul>{this.dinoNames}</ul>
             </div>
         );
     
