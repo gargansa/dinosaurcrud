@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-
-
+import EditDino from './editDino'
+import { Container, Row, Col } from 'reactstrap';
 export default class Dinos extends React.Component{
     constructor(){
         super()
@@ -51,8 +51,14 @@ export default class Dinos extends React.Component{
        let newDinos = this.state.dinosaurs.filter(dinosaur => dinosaur.name !== name)
         this.setState({dinosaurs: newDinos})
     }
-    editDino(){
-
+    editDino(event){
+        //event.preventDefault();
+        let currentDino = event;
+        console.log(currentDino)
+        // let dummyDino = {name: this.state.name, height: this.state.height, weight: this.state.weight, era: this.state.era, diet: this.state.diet}
+        // let theDinos = this.state.dinosaurs.slice()
+        // theDinos.push(dummyDino)
+        // this.setState({dinosaurs: theDinos})
     //Parameters: take in the user input
     //Return: setting state of dino
     //Example: user clicks edit and type T-Rex displays "T-Rex"
@@ -70,46 +76,55 @@ export default class Dinos extends React.Component{
         this.dinoNames = this.state.dinosaurs.map((item)=> 
         <li key={item.name}><h1 color="aquamarine">{item.name}</h1>
           <button onClick={()=>{this.deleteDino(item.name)}}>Delete</button>
-          <button onClick={()=>{this.editDino()}}>Edit</button>
+          <button onClick={()=>{this.editDino(item)}}>Edit</button>
         </li>
         )
     }
-
+    testDino(){
+        console.log('a')
+    }
 
     render(){
         this.readDinos()
         return (
             <div>
-                <ul>{this.dinoNames}</ul>
-                <h1>Create New Dino</h1>
-                <Form>
-                    <FormGroup>
-                        <Label for="dinoName">Name of Dino</Label>
-                        <Input type="text" name="name" id="dinoName" placeholder="Spinosaurus" onChange={this.handleChange} />
-                    </FormGroup>
+                 <Container>
+                    <Row>
+                        <Col><ul>{this.dinoNames}</ul></Col>
+                        <Col><EditDino></EditDino></Col>
+                        <Col>
+                            <h1>Create New Dino</h1>
+                            
+                            <Form>
+                                <FormGroup>
+                                    <Label for="dinoName">Name of Dino</Label>
+                                    <Input type="text" name="name" id="dinoName" placeholder="Spinosaurus" onChange={this.handleChange} />
+                                </FormGroup>
 
-                    <FormGroup>
-                        <Label for="dinoHeight">Height</Label>
-                        <Input type="text" name="height" id="dinoHeight" placeholder="11 ft" onChange={this.handleChange}/>
-                    </FormGroup>
+                                <FormGroup>
+                                    <Label for="dinoHeight">Height</Label>
+                                    <Input type="text" name="height" id="dinoHeight" placeholder="11 ft" onChange={this.handleChange}/>
+                                </FormGroup>
 
-                    <FormGroup>
-                        <Label for="dinoWeight">Weight</Label>
-                        <Input type="text" name="weight" id="dinoWeight" placeholder="1000 kg" onChange={this.handleChange} />
-                    </FormGroup>
+                                <FormGroup>
+                                    <Label for="dinoWeight">Weight</Label>
+                                    <Input type="text" name="weight" id="dinoWeight" placeholder="1000 kg" onChange={this.handleChange} />
+                                </FormGroup>
 
-                    <FormGroup>
-                        <Label for="dinoEra">Era</Label>
-                        <Input type="text" name="era" id="dinoEra" placeholder="Late Jurassic" onChange={this.handleChange} />
-                    </FormGroup>
+                                <FormGroup>
+                                    <Label for="dinoEra">Era</Label>
+                                    <Input type="text" name="era" id="dinoEra" placeholder="Late Jurassic" onChange={this.handleChange} />
+                                </FormGroup>
 
-                    <FormGroup>
-                        <Label for="dinoDiet">Diet</Label>
-                        <Input type="text" name="diet" id="dinoDiet" placeholder="Mostly Beats" onChange={this.handleChange} />
-                    </FormGroup>
-                </Form>
-                <button onClick={this.createDino}>Submit</button>
-                
+                                <FormGroup>
+                                    <Label for="dinoDiet">Diet</Label>
+                                    <Input type="text" name="diet" id="dinoDiet" placeholder="Mostly Beats" onChange={this.handleChange} />
+                                </FormGroup>
+                                <button onClick={this.createDino}>Submit</button>
+                            </Form>
+                        </Col>
+                    </Row>
+                </Container>
             </div>
         );
 }
