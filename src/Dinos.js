@@ -59,7 +59,9 @@ class Dinos extends React.Component{
        let newDinos = this.state.dinosaurs.filter(dinosaur => dinosaur.name !== name)
         //console.log(newDinos)
         this.setState({dinosaurs: newDinos})
-    
+    }
+    editDino(){
+
     }
     //create a Form with:
         //input fields, submit button
@@ -69,7 +71,16 @@ class Dinos extends React.Component{
 
     render(){
         this.dinoNames = this.state.dinosaurs.map((item)=>
-          <li key={item.name}>{item.name}<button onClick={()=>{this.deleteDino(item.name)}}>Delete</button></li>
+            
+          <li key={item.name}><h1 color="aquamarine">{item.name}</h1>
+          <h2>{item.height}</h2>
+          <h2>{item.weight}</h2>
+          <h2>{item.era}</h2>
+          <h2>{item.diet}</h2>
+
+            <button onClick={()=>{this.deleteDino(item.name)}}>Delete</button>
+            <button onClick={()=>{this.editDino()}}>Edit</button>
+          </li>
       )
         return (
             <div>
