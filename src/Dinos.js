@@ -20,19 +20,19 @@ export default class Dinos extends React.Component{
             era:"",
             diet:"",
             dinosaurs:[
-            {id: 0, name: 'Parasaurolophus', height:'16ft', weight:'2268 kg', era:'Late Cretaceous', diet: 'Herbivore'},
+            // {id: 0, name: 'Parasaurolophus', height:'16ft', weight:'2268 kg', era:'Late Cretaceous', diet: 'Herbivore'},
 
-            {id: 1, name: 'Brachiosaurus', height:'31ft', weight:'35000 kg', era: 'Late Jurassic', diet:'Herbivore'},
+            // {id: 1, name: 'Brachiosaurus', height:'31ft', weight:'35000 kg', era: 'Late Jurassic', diet:'Herbivore'},
             
-            {id: 2, name: 'Gallimimus', height:'6ft', weight:'440 kg', era: 'Late Cretaceous', diet: 'Insectivorous'},
+            // {id: 2, name: 'Gallimimus', height:'6ft', weight:'440 kg', era: 'Late Cretaceous', diet: 'Insectivorous'},
             
-            {id: 3, name: 'Dilophosaurus', height: '6ft', weight: '283 kg', era: 'Early Jurassic',  diet: 'Scavenger'},
+            // {id: 3, name: 'Dilophosaurus', height: '6ft', weight: '283 kg', era: 'Early Jurassic',  diet: 'Scavenger'},
             
-            {id: 4, name: 'Triceratops', height: '9ft', weight: '10886 kg',  era: 'Late Cretaceous', diet: 'Herbivore'},
+            // {id: 4, name: 'Triceratops', height: '9ft', weight: '10886 kg',  era: 'Late Cretaceous', diet: 'Herbivore'},
             
-            {id: 5, name: 'Tyrannosaurus', height: '12ft', weight: '7257 kg', era: 'Late Cretaceous', diet: 'Carnivore'},
+            // {id: 5, name: 'Tyrannosaurus', height: '12ft', weight: '7257 kg', era: 'Late Cretaceous', diet: 'Carnivore'},
             
-            {id: 6, name: 'Velociraptor', height: '2ft', weight: '15 kg', era: 'Late Cretaceous', diet: 'Carnivore'}
+            // {id: 6, name: 'Velociraptor', height: '2ft', weight: '15 kg', era: 'Late Cretaceous', diet: 'Carnivore'}
             ]
         }
         this.deleteDino = this.deleteDino.bind(this);
@@ -48,7 +48,11 @@ export default class Dinos extends React.Component{
         [name]: event.target.value
         });
     }
-
+    componentDidMount(){
+        let dino = JSON.parse(localStorage.getItem("dinoStorage"));
+        console.log(dino)
+        this.setState({dinosaurs: dino})
+    }
     createDino(event) {
         event.preventDefault();
         let currentId = this.state.dinosaurs[this.state.dinosaurs.length-1].id
@@ -56,16 +60,19 @@ export default class Dinos extends React.Component{
         let theDinos = this.state.dinosaurs.slice()
         theDinos.push(dummyDino)
         this.setState({dinosaurs: theDinos})
+        localStorage.setItem("dinoStorage", JSON.stringify(theDinos));
     }
 
     deleteDino(name){
        let newDinos = this.state.dinosaurs.filter(dinosaur => dinosaur.name !== name)
         this.setState({dinosaurs: newDinos})
+        localStorage.setItem("dinoStorage", JSON.stringify(newDinos));
     }
     editDino(dino){
         //event.preventDefault();
         // let testDino = dino.name;
         this.setState({dinoToEdit : dino})
+        
     }
     readDinos(){
         this.dinoNames = this.state.dinosaurs.map((item)=> 
@@ -85,6 +92,7 @@ export default class Dinos extends React.Component{
             }
         })
         this.setState({dinosaurs:newDinoObj})
+        localStorage.setItem("dinoStorage", JSON.stringify(newDinoObj));
     }
 
     render(){
