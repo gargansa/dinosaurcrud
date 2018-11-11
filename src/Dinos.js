@@ -6,6 +6,13 @@ export default class Dinos extends React.Component{
     constructor(){
         super()
         this.state = {
+            dinoToEdit: {
+                name:"",
+                height:"",
+                weight:"",
+                era:"",
+                diet:"",
+            },
             name:"",
             height:"",
             weight:"",
@@ -30,6 +37,7 @@ export default class Dinos extends React.Component{
         this.deleteDino = this.deleteDino.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.createDino = this.createDino.bind(this);
+        //this.editDino = this.editDino.bind(this);
     } // ends constructor 
 
     handleChange(event) {
@@ -51,10 +59,10 @@ export default class Dinos extends React.Component{
        let newDinos = this.state.dinosaurs.filter(dinosaur => dinosaur.name !== name)
         this.setState({dinosaurs: newDinos})
     }
-    editDino(event){
+    editDino(dino){
         //event.preventDefault();
-        let currentDino = event;
-        console.log(currentDino)
+        let testDino = dino.name;
+        this.setState({dinoToEdit : dino})
         // let dummyDino = {name: this.state.name, height: this.state.height, weight: this.state.weight, era: this.state.era, diet: this.state.diet}
         // let theDinos = this.state.dinosaurs.slice()
         // theDinos.push(dummyDino)
@@ -91,7 +99,9 @@ export default class Dinos extends React.Component{
                  <Container>
                     <Row>
                         <Col><ul>{this.dinoNames}</ul></Col>
-                        <Col><EditDino></EditDino></Col>
+                        <Col><EditDino
+                        dino={this.state.dinoToEdit}
+                        ></EditDino></Col>
                         <Col>
                             <h1>Create New Dino</h1>
                             
