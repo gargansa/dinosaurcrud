@@ -7,6 +7,7 @@ export default class Dinos extends React.Component{
         super()
         this.state = {
             dinoToEdit: {
+                id: -1,
                 name:"",
                 height:"",
                 weight:"",
@@ -19,30 +20,30 @@ export default class Dinos extends React.Component{
             era:"",
             diet:"",
             dinosaurs:[
-            {name: 'Parasaurolophus', height:'16ft', weight:'2268 kg', era:'Late Cretaceous', diet: 'Herbivore'},
+            {id: 0, name: 'Parasaurolophus', height:'16ft', weight:'2268 kg', era:'Late Cretaceous', diet: 'Herbivore'},
 
-            {name: 'Brachiosaurus', height:'31ft', weight:'35000 kg', era: 'Late Jurassic', diet:'Herbivore'},
+            {id: 1, name: 'Brachiosaurus', height:'31ft', weight:'35000 kg', era: 'Late Jurassic', diet:'Herbivore'},
             
-            {name: 'Gallimimus', height:'6ft', weight:'440 kg', era: 'Late Cretaceous', diet: 'Insectivorous'},
+            {id: 2, name: 'Gallimimus', height:'6ft', weight:'440 kg', era: 'Late Cretaceous', diet: 'Insectivorous'},
             
-            {name: 'Dilophosaurus', height: '6ft', weight: '283 kg', era: 'Early Jurassic',  diet: 'Scavenger'},
+            {id: 3, name: 'Dilophosaurus', height: '6ft', weight: '283 kg', era: 'Early Jurassic',  diet: 'Scavenger'},
             
-            {name: 'Triceratops', height: '9ft', weight: '10886 kg',  era: 'Late Cretaceous', diet: 'Herbivore'},
+            {id: 4, name: 'Triceratops', height: '9ft', weight: '10886 kg',  era: 'Late Cretaceous', diet: 'Herbivore'},
             
-            {name: 'Tyrannosaurus', height: '12ft', weight: '7257 kg', era: 'Late Cretaceous', diet: 'Carnivore'},
+            {id: 5, name: 'Tyrannosaurus', height: '12ft', weight: '7257 kg', era: 'Late Cretaceous', diet: 'Carnivore'},
             
-            {name: 'Velociraptor', height: '2ft', weight: '15 kg', era: 'Late Cretaceous', diet: 'Carnivore'}
+            {id: 6, name: 'Velociraptor', height: '2ft', weight: '15 kg', era: 'Late Cretaceous', diet: 'Carnivore'}
             ]
         }
         this.deleteDino = this.deleteDino.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.createDino = this.createDino.bind(this);
+        this.updateDino= this.updateDino.bind(this);
         //this.editDino = this.editDino.bind(this);
     } // ends constructor 
 
     handleChange(event) {
         const name = event.target.name;
-        console.log(event)
         this.setState({
         [name]: event.target.value
         });
@@ -50,7 +51,8 @@ export default class Dinos extends React.Component{
 
     createDino(event) {
         event.preventDefault();
-        let dummyDino = {name: this.state.name, height: this.state.height, weight: this.state.weight, era: this.state.era, diet: this.state.diet}
+        let currentId = this.state.dinosaurs[this.state.dinosaurs.length-1].id
+        let dummyDino = {id: currentId+1, name: this.state.name, height: this.state.height, weight: this.state.weight, era: this.state.era, diet: this.state.diet}
         let theDinos = this.state.dinosaurs.slice()
         theDinos.push(dummyDino)
         this.setState({dinosaurs: theDinos})
@@ -60,46 +62,29 @@ export default class Dinos extends React.Component{
        let newDinos = this.state.dinosaurs.filter(dinosaur => dinosaur.name !== name)
         this.setState({dinosaurs: newDinos})
     }
-    updateDino(event){
-        console.log(event.target)
-        // event.preventDefault();
-        // let dummyDino = {name: this.state.name, height: this.state.height, weight: this.state.weight, era: this.state.era, diet: this.state.diet}
-        // let theDinos = this.state.dinosaurs.slice()
-        // theDinos.push(dummyDino)
-        // this.setState({dinosaurs: theDinos})
-       // console.log("hey")
-    }
     editDino(dino){
         //event.preventDefault();
         // let testDino = dino.name;
         this.setState({dinoToEdit : dino})
-        // let dummyDino = {name: this.state.name, height: this.state.height, weight: this.state.weight, era: this.state.era, diet: this.state.diet}
-        // let theDinos = this.state.dinosaurs.slice()
-        // theDinos.push(dummyDino)
-        // this.setState({dinosaurs: theDinos})
-    //Parameters: take in the user input
-    //Return: setting state of dino
-    //Example: user clicks edit and type T-Rex displays "T-Rex"
-    //Pseudo Code: make button
-    // onClick function that updates object
-    // Similar to createDino
-    // create read function 
-
-
-    //create a Form with:
-        //input fields, submit button
-        //populate that info on the page
     }
     readDinos(){
         this.dinoNames = this.state.dinosaurs.map((item)=> 
-        <li key={item.name}><h1 color="aquamarine">{item.name}</h1>
+        <li key={item.id}><h1 color="aquamarine">{item.name}</h1>
           <button onClick={()=>{this.deleteDino(item.name)}}>Delete</button>
           <button onClick={()=>{this.editDino(item)}}>Edit</button>
         </li>
         )
     }
-    testDino(){
-        console.log('a')
+    updateDino(newDino){
+        let newDinoObj = this.state.dinosaurs.map((oldDino) =>{
+            if (oldDino.id === newDino.id){
+                return newDino;
+            }
+            else{
+                return oldDino;
+            }
+        })
+        this.setState({dinosaurs:newDinoObj})
     }
 
     render(){
@@ -110,9 +95,8 @@ export default class Dinos extends React.Component{
                     <Row>
                         <Col><ul>{this.dinoNames}</ul></Col>
                         <Col><EditDino
+                        updateDino={this.updateDino}
                         dino={this.state.dinoToEdit}
-                        updatingDino={this.updateDino}
-                        handleChange= {this.handleChange}
                         ></EditDino></Col>
                         <Col>
                             <h1>Create New Dino</h1>

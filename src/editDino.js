@@ -23,13 +23,14 @@ handleSubmit(event){
     event.preventDefault()
     //BUILD UPDATED DINOSAUR
     let updatedDino = {
+        id: this.props.dino.id,
         name:this.state.name.length ? this.state.name : this.props.dino.name ,
         height:this.state.height.length ? this.state.height : this.props.dino.height ,
         weight:this.state.weight.length ? this.state.weight : this.props.dino.weight ,
         era:this.state.era.length ? this.state.era : this.props.dino.era ,
         diet:this.state.diet.length ? this.state.diet : this.props.dino.diet
     }
-    console.log(updatedDino)
+    this.props.updateDino(updatedDino) 
 }
 handleChange(event) {
     const name = event.target.name;
