@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 
-class Dinos extends React.Component{
+export default class Dinos extends React.Component{
     constructor(){
         super()
         this.state = {
@@ -29,59 +29,59 @@ class Dinos extends React.Component{
         }
         this.deleteDino = this.deleteDino.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.createDino = this.createDino.bind(this);
     } // ends constructor 
 
     handleChange(event) {
-        //console.log(event.target.value)
         const name = event.target.name;
         this.setState({
         [name]: event.target.value
         });
-        // this.setState({value: event.name});
     }
 
-    handleSubmit(event) {
+    createDino(event) {
         event.preventDefault();
-        // let dummyDino = {name: 'Spinosaurus', height: '9ft', weight: '2000 kg', era: 'Pre Jesus', diet: 'Light Salad'}
         let dummyDino = {name: this.state.name, height: this.state.height, weight: this.state.weight, era: this.state.era, diet: this.state.diet}
-        //duplicate array
         let theDinos = this.state.dinosaurs.slice()
         theDinos.push(dummyDino)
-        console.log(theDinos)
-        //push to array
-        //.push(dummyDino)
         this.setState({dinosaurs: theDinos})
     }
 
     deleteDino(name){
-       // e.persist()
        let newDinos = this.state.dinosaurs.filter(dinosaur => dinosaur.name !== name)
-        //console.log(newDinos)
         this.setState({dinosaurs: newDinos})
     }
     editDino(){
-
+        
     }
+    readDinos(){
+        this.dinoNames = this.state.dinosaurs.map((item)=> 
+        <li key={item.name}><h1 color="aquamarine">{item.name}</h1>
+        <h2>{item.height}</h2>
+        <h2>{item.weight}</h2>
+        <h2>{item.era}</h2>
+        <h2>{item.diet}</h2>
+          <button onClick={()=>{this.deleteDino(item.name)}}>Delete</button>
+          <button onClick={()=>{this.editDino()}}>Edit</button>
+        </li>
+        )
+    }
+    //Parameters: take in the user input
+    //Return: setting state of dino
+    //Example: user clicks edit and type T-Rex displays "T-Rex"
+    //Pseudo Code: make button
+    // onClick function that updates object
+    // Similar to createDino
+    // create read function 
+
+
     //create a Form with:
         //input fields, submit button
         //populate that info on the page
 
 
-
     render(){
-        this.dinoNames = this.state.dinosaurs.map((item)=>
-            
-          <li key={item.name}><h1 color="aquamarine">{item.name}</h1>
-          <h2>{item.height}</h2>
-          <h2>{item.weight}</h2>
-          <h2>{item.era}</h2>
-          <h2>{item.diet}</h2>
-
-            <button onClick={()=>{this.deleteDino(item.name)}}>Delete</button>
-            <button onClick={()=>{this.editDino()}}>Edit</button>
-          </li>
-      )
+        this.readDinos()
         return (
             <div>
                 <ul>{this.dinoNames}</ul>
@@ -111,32 +111,7 @@ class Dinos extends React.Component{
                         <Input type="text" name="diet" id="dinoDiet" placeholder="Mostly Beats" onChange={this.handleChange} />
                     </FormGroup>
                 </Form>
-                <button onClick={this.handleSubmit}>Submit</button>
-                {/* <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Name of Dinosaur:
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
-                    </label>
-                    <label>
-                        Height:
-                         <input type="text" value={this.state.value} onChange={this.handleChange} />
-                    </label>
-                    <label>
-                        Weight:
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
-                    </label>
-                    <label>
-                        Era:
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
-                    </label>
-                    <label>
-                        Diet:
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
-                    </label> */}
-                    
-
-                        {/* <input type="submit" value="Submit" />
-                        </form> */}
+                <button onClick={this.createDino}>Submit</button>
                 
             </div>
         );
@@ -144,31 +119,6 @@ class Dinos extends React.Component{
 };
 
 
-// class EssayForm extends React.Component {
-//     constructor(props) {
-//       super(props);
-//       this.state = {
-//         value: 'Please write an essay about your favorite DOM element.'
-//       };
-  
-//       this.handleChange = this.handleChange.bind(this);
-//       this.handleSubmit = this.handleSubmit.bind(this);
-//     }
   
     
   
-//     render() {
-//       return (
-//         <form onSubmit={this.handleSubmit}>
-//           <label>
-//             Essay:
-//             <textarea value={this.state.value} onChange={this.handleChange} />
-//           </label>
-//           <input type="submit" value="Submit" />
-//         </form>
-//       );
-//     }
-//   }
-  
-
-export default Dinos;
