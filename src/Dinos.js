@@ -52,20 +52,7 @@ export default class Dinos extends React.Component{
         this.setState({dinosaurs: newDinos})
     }
     editDino(){
-        
-    }
-    readDinos(){
-        this.dinoNames = this.state.dinosaurs.map((item)=> 
-        <li key={item.name}><h1 color="aquamarine">{item.name}</h1>
-        <h2>{item.height}</h2>
-        <h2>{item.weight}</h2>
-        <h2>{item.era}</h2>
-        <h2>{item.diet}</h2>
-          <button onClick={()=>{this.deleteDino(item.name)}}>Delete</button>
-          <button onClick={()=>{this.editDino()}}>Edit</button>
-        </li>
-        )
-    }
+
     //Parameters: take in the user input
     //Return: setting state of dino
     //Example: user clicks edit and type T-Rex displays "T-Rex"
@@ -78,6 +65,15 @@ export default class Dinos extends React.Component{
     //create a Form with:
         //input fields, submit button
         //populate that info on the page
+    }
+    readDinos(){
+        this.dinoNames = this.state.dinosaurs.map((item)=> 
+        <li key={item.name}><h1 color="aquamarine">{item.name}</h1>
+          <button onClick={()=>{this.deleteDino(item.name)}}>Delete</button>
+          <button onClick={()=>{this.editDino()}}>Edit</button>
+        </li>
+        )
+    }
 
 
     render(){
@@ -85,6 +81,7 @@ export default class Dinos extends React.Component{
         return (
             <div>
                 <ul>{this.dinoNames}</ul>
+                <h1>Create New Dino</h1>
                 <Form>
                     <FormGroup>
                         <Label for="dinoName">Name of Dino</Label>
