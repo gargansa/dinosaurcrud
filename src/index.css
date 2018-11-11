@@ -20,3 +20,7 @@ ul {
 h1{
   color:aquamarine !important;
 }
+img{
+  width: 400px;
+  /* height: 400px; */
+}

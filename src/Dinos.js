@@ -125,7 +125,8 @@ export default class Dinos extends React.Component{
                  <Container>
                     <Row>
                         <Col><ul>{this.dinoNames}</ul></Col>
-                        <Col><EditDino
+                        <Col> <h1>Edit Dinos OMG</h1>
+                        <EditDino
                         updateDino={this.updateDino}
                         dino={this.state.dinoToEdit}
                         ></EditDino></Col>
