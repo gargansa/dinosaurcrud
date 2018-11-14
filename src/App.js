@@ -4,6 +4,7 @@ import './App.css';
 import Dinos from './Dinos'
 import Navigation from './Navbar.js'
 import DinoSlides from './Carousel.js'
+import RouterComponent from './RouterComponent';
 
 class App extends Component {
   render() {
@@ -11,8 +12,8 @@ class App extends Component {
       <div className="App">
       <Navigation />
         <header className="App-header">
-          <Dinos />
-          <DinoSlides />
+          <RouterComponent />
+          {/* <DinoSlides /> */}
         </header>
       </div>
     );

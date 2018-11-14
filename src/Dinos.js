@@ -130,37 +130,8 @@ export default class Dinos extends React.Component{
                         updateDino={this.updateDino}
                         dino={this.state.dinoToEdit}
                         ></EditDino></Col>
-                        <Col>
-                            <h1>Create New Dino</h1>
+                    
                             
-                            <Form>
-                                <FormGroup>
-                                    <Label for="dinoName">Name of Dino</Label>
-                                    <Input type="text" name="name" id="dinoName" placeholder="Spinosaurus" onChange={this.handleChange} />
-                                </FormGroup>
-
-                                <FormGroup>
-                                    <Label for="dinoHeight">Height</Label>
-                                    <Input type="text" name="height" id="dinoHeight" placeholder="11 ft" onChange={this.handleChange}/>
-                                </FormGroup>
-
-                                <FormGroup>
-                                    <Label for="dinoWeight">Weight</Label>
-                                    <Input type="text" name="weight" id="dinoWeight" placeholder="1000 kg" onChange={this.handleChange} />
-                                </FormGroup>
-
-                                <FormGroup>
-                                    <Label for="dinoEra">Era</Label>
-                                    <Input type="text" name="era" id="dinoEra" placeholder="Late Jurassic" onChange={this.handleChange} />
-                                </FormGroup>
-
-                                <FormGroup>
-                                    <Label for="dinoDiet">Diet</Label>
-                                    <Input type="text" name="diet" id="dinoDiet" placeholder="Mostly Beats" onChange={this.handleChange} />
-                                </FormGroup>
-                                <button onClick={this.createDino}>Submit</button>
-                            </Form>
-                        </Col>
                     </Row>
                 </Container>
             </div>
