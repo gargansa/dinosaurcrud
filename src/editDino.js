@@ -2,48 +2,48 @@ import React from 'react'
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 
-export default class EditDino extends React.Component{
-    constructor(props){
+export default class EditDino extends React.Component {
+    constructor(props) {
         super(props)
         // this.props.name = "something"
         // man alive
         this.state = {
-            name:"",
-            height:"",
-            weight:"",
-            era:"",
-            diet:""
+            name: "",
+            height: "",
+            weight: "",
+            era: "",
+            diet: ""
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
     }
-    
-   
-handleSubmit(event){
-    event.preventDefault()
-    //BUILD UPDATED DINOSAUR
-    let updatedDino = {
-        id: this.props.dino.id,
-        name:this.state.name.length ? this.state.name : this.props.dino.name ,
-        height:this.state.height.length ? this.state.height : this.props.dino.height ,
-        weight:this.state.weight.length ? this.state.weight : this.props.dino.weight ,
-        era:this.state.era.length ? this.state.era : this.props.dino.era ,
-        diet:this.state.diet.length ? this.state.diet : this.props.dino.diet
+
+
+    handleSubmit(event) {
+        event.preventDefault()
+        //BUILD UPDATED DINOSAUR
+        let updatedDino = {
+            id: this.props.dino.id,
+            name: this.state.name.length ? this.state.name : this.props.dino.name,
+            height: this.state.height.length ? this.state.height : this.props.dino.height,
+            weight: this.state.weight.length ? this.state.weight : this.props.dino.weight,
+            era: this.state.era.length ? this.state.era : this.props.dino.era,
+            diet: this.state.diet.length ? this.state.diet : this.props.dino.diet
+        }
+        this.props.updateDino(updatedDino)
     }
-    this.props.updateDino(updatedDino) 
-}
-handleChange(event) {
-    const name = event.target.name;
-    this.setState({
-    [name]: event.target.value
-    });
-}
-    render(){
+    handleChange(event) {
+        const name = event.target.name;
+        this.setState({
+            [name]: event.target.value
+        });
+    }
+    render() {
         //console.log(this.props.dino.name)
         return (
 
             <div>
-                
+
                 <Form>
                     <FormGroup>
                         <Label for="dinoName">Name of Dino</Label>
@@ -52,7 +52,7 @@ handleChange(event) {
 
                     <FormGroup>
                         <Label for="dinoHeight">Height</Label>
-                        <Input type="text" defaultValue={this.props.dino.height} name="height" id="dinoHeight" onChange={this.handleChange}/>
+                        <Input type="text" defaultValue={this.props.dino.height} name="height" id="dinoHeight" onChange={this.handleChange} />
                     </FormGroup>
 
                     <FormGroup>
@@ -71,7 +71,7 @@ handleChange(event) {
                     </FormGroup>
                 </Form>
                 <button onClick={this.handleSubmit}>Submit</button>
-                
+
             </div>
         )
     }
