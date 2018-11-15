@@ -7,9 +7,10 @@ export default class DinoDelete extends React.Component {
         super(props)
         console.log("DinoDelete")
         console.log(this.props.dinosaurs)
+        this.destroy = this.destroy.bind(this)
     }
-    destroy(e) {
-        console.log(e)
+    destroy(item) {
+        console.log(item)
         // let theDinos = this.props.dinosaurs.filter(dinosaur => dinosaur.id !== id)
         // localStorage.setItem("dinoStorage", JSON.stringify(theDinos));
     }
@@ -20,7 +21,7 @@ export default class DinoDelete extends React.Component {
                 <FormGroup>
                     <Label>Name: {item.name}</Label>
                 </FormGroup>
-                <Button key={item.id} onClick={this.destroy} >Delete</Button>
+                <Button onClick={this.destroy(item.id)} >Delete</Button>
             </Form>
         )
 
