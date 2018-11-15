@@ -88,7 +88,7 @@ export default class Dinos extends React.Component {
 
     //Edit Functions
     editDino(dino) {
-        //this is when the button is clicked
+        //this is when the button is clicked to populate edit fields
         this.setState({ dinoToEdit: dino })
     }
 
@@ -148,7 +148,7 @@ export default class Dinos extends React.Component {
                     <Label for="dinoDiet">Diet</Label>
                     <Input type="text" defaultValue={this.state.dinoToEdit.diet} name="diet" id="dinoDiet" onChange={this.handleChange} />
                 </FormGroup>
-                <Button onClick={this.state.dinoToEdit.submitEdit}>Submit Edit</Button>
+                <Button onClick={this.submitEdit}>Submit Edit</Button>
             </Form>)
     }
 
@@ -209,7 +209,6 @@ export default class Dinos extends React.Component {
                         </Col>
                         <Col> <h1>Edit</h1>
                             {this.displayEditDinos()}
-                            
                         </Col>
                         <Col><h1>Create</h1>
                             {this.displayCreateDinos()}
