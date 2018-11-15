@@ -19,6 +19,7 @@ export default class Dinos extends React.Component {
             weight: "",
             era: "",
             diet: "",
+
             dinosaurs: [
             ]
         }
@@ -32,11 +33,11 @@ export default class Dinos extends React.Component {
 
     //Used for Edit and Create
     handleChange(event) {
-        const name = event.target.name;
+        let name = event.target.name;
         this.setState({
             [name]: event.target.value
         });
-        console.log(event.target.value)
+        
     }
 
     //Create functions
@@ -77,6 +78,7 @@ export default class Dinos extends React.Component {
         theDinos.push(dummyDino)
         this.setState({ dinosaurs: theDinos })
         localStorage.setItem("dinoStorage", JSON.stringify(theDinos));
+        
     }
 
     //Delete Functions
@@ -95,6 +97,7 @@ export default class Dinos extends React.Component {
     submitEdit(event) {
         event.preventDefault()
         //BUILD UPDATED DINOSAUR
+        
         let updatedDino = {
             id: this.state.dinoToEdit.id,
             name:this.state.name.length ? this.state.name:this.state.dinoToEdit.name,
@@ -104,6 +107,21 @@ export default class Dinos extends React.Component {
             diet:this.state.diet.length ? this.state.diet:this.state.dinoToEdit.diet
         }
         this.updateDino(updatedDino)
+        this.setState({ dinoToEdit: {
+            id: -1,
+            name: "",
+            height: "",
+            weight: "",
+            era: "",
+            diet: "",
+        },
+        name: "",
+        height: "",
+        weight: "",
+        era: "",
+        diet: "",
+        //reset the name 
+    })
     }
 
     updateDino(newDino) {
