@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 // import DinoCreate from './DinoCreate';
-import DinoRead from './DinoRead'; //working
+// import DinoRead from './DinoRead'; //working
 // import DinoUpdate from './DinoUpdate'; //not
 import DinoDelete from './DinoDelete'; //not
 
@@ -13,7 +13,7 @@ export default class App extends Component {
   render() {
     let dinosaurs = [];
     dinosaurs = JSON.parse(localStorage.getItem("dinoStorage"));
-    if (dinosaurs.length===0) {
+    if (!dinosaurs) {
       dinosaurs = [
         { id: 0, name: 'Parasaurolophus', height: '16ft', weight: '2268 kg', era: 'Late Cretaceous', diet: 'Herbivore' },
         {id: 1, name: 'Brachiosaurus', height:'31ft', weight:'35000 kg', era: 'Late Jurassic', diet:'Herbivore'},
@@ -31,7 +31,7 @@ export default class App extends Component {
     return (
       <div>
         {/* <DinoCreate dinosaurs={dinosaurs}/> */}
-        <DinoRead dinosaurs={dinosaurs}/>
+        {/* <DinoRead dinosaurs={dinosaurs}/> */}
         {/* <DinoUpdate dinosaurs={dinosaurs}/> */}
         <DinoDelete dinosaurs={dinosaurs}/>
       </div>
