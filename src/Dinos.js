@@ -36,6 +36,7 @@ export default class Dinos extends React.Component {
         this.setState({
             [name]: event.target.value
         });
+        console.log(event.target.value)
     }
 
     //Create functions
@@ -87,6 +88,7 @@ export default class Dinos extends React.Component {
 
     //Edit Functions
     editDino(dino) {
+        //this is when the button is clicked
         this.setState({ dinoToEdit: dino })
     }
 
@@ -94,12 +96,12 @@ export default class Dinos extends React.Component {
         event.preventDefault()
         //BUILD UPDATED DINOSAUR
         let updatedDino = {
-            id: this.props.dino.id,
-            name:this.state.name.length ? this.state.name : this.props.dino.name ,
-            height:this.state.height.length ? this.state.height : this.props.dino.height ,
-            weight:this.state.weight.length ? this.state.weight : this.props.dino.weight ,
-            era:this.state.era.length ? this.state.era : this.props.dino.era ,
-            diet:this.state.diet.length ? this.state.diet : this.props.dino.diet
+            id: this.state.dinoToEdit.id,
+            name:this.state.name.length ? this.state.name:this.state.dinoToEdit.name,
+            height:this.state.height.length ? this.state.height:this.state.dinoToEdit.height,
+            weight:this.state.weight.length ? this.state.weight:this.state.dinoToEdit.weight,
+            era:this.state.era.length ? this.state.era:this.state.dinoToEdit.era,
+            diet:this.state.diet.length ? this.state.diet:this.state.dinoToEdit.diet
         }
         this.updateDino(updatedDino)
     }
@@ -124,29 +126,29 @@ export default class Dinos extends React.Component {
             <Form>
                 <FormGroup>
                     <Label for="dinoName">Name of Dino</Label>
-                    <Input type="text" defaultValue={this.name} name="name" id="dinoName" onChange={this.handleChange} />
+                    <Input type="text" defaultValue={this.state.dinoToEdit.name} name="name" id="dinoName" onChange={this.handleChange} />
                 </FormGroup>
 
                 <FormGroup>
                     <Label for="dinoHeight">Height</Label>
-                    <Input type="text" defaultValue={this.height} name="height" id="dinoHeight" onChange={this.handleChange} />
+                    <Input type="text" defaultValue={this.state.dinoToEdit.height} name="height" id="dinoHeight" onChange={this.handleChange} />
                 </FormGroup>
 
                 <FormGroup>
                     <Label for="dinoWeight">Weight</Label>
-                    <Input type="text" defaultValue={this.weight} name="weight" id="dinoWeight" onChange={this.handleChange} />
+                    <Input type="text" defaultValue={this.state.dinoToEdit.weight} name="weight" id="dinoWeight" onChange={this.handleChange} />
                 </FormGroup>
 
                 <FormGroup>
                     <Label for="dinoEra">Era</Label>
-                    <Input type="text" name="era" defaultValue={this.era} id="dinoEra" onChange={this.handleChange} />
+                    <Input type="text" name="era" defaultValue={this.state.dinoToEdit.era} id="dinoEra" onChange={this.handleChange} />
                 </FormGroup>
 
                 <FormGroup>
                     <Label for="dinoDiet">Diet</Label>
-                    <Input type="text" defaultValue={this.diet} name="diet" id="dinoDiet" onChange={this.handleChange} />
+                    <Input type="text" defaultValue={this.state.dinoToEdit.diet} name="diet" id="dinoDiet" onChange={this.handleChange} />
                 </FormGroup>
-                <Button onClick={this.submitEdit}>Submit Edit</Button>
+                <Button onClick={this.state.dinoToEdit.submitEdit}>Submit Edit</Button>
             </Form>)
     }
 
@@ -154,9 +156,13 @@ export default class Dinos extends React.Component {
         return (
             this.dinoNames = this.state.dinosaurs.map((item) =>
                 <FormGroup key={item.id}>
+                    <Row>
                     <Label>{item.name}</Label>
+                    </Row>
+                    <Row>
                     <Button onClick={() => { this.deleteDino(item.name) }}>Delete</Button>
                     <Button onClick={() => { this.editDino(item) }}>Edit</Button>
+                    </Row>
                 </FormGroup>)
         )
     }
