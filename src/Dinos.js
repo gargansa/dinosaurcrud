@@ -36,10 +36,19 @@ export default class Dinos extends React.Component {
         let name = event.target.name;
         this.setState({
             [name]: event.target.value
-        });
-        
+        });  
     }
-
+    //display via alert
+    readDino(item){
+        alert(    
+        "ID: " + item.id +"\n" + 
+        "Name: " + item.name +"\n" +
+        "Height: " + item.height +"\n" +
+        "Weight: " + item.weight +"\n" +
+        "Era: " + item.era +"\n" +
+        "Diet: " + item.diet
+        )
+    }
     //Create functions
     componentDidMount() {
         let initialDinosaurs = []
@@ -178,6 +187,7 @@ export default class Dinos extends React.Component {
                     <Label>{item.name}</Label>
                     </Row>
                     <Row>
+                    <Button onClick={() => { this.readDino(item) }}>Read</Button>
                     <Button onClick={() => { this.deleteDino(item.name) }}>Delete</Button>
                     <Button onClick={() => { this.editDino(item) }}>Edit</Button>
                     </Row>
