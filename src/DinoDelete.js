@@ -9,10 +9,10 @@ export default class DinoDelete extends React.Component {
         console.log(this.props.dinosaurs)
         this.destroy = this.destroy.bind(this)
     }
-    destroy(item) {
-        console.log(item)
-        // let theDinos = this.props.dinosaurs.filter(dinosaur => dinosaur.id !== id)
-        // localStorage.setItem("dinoStorage", JSON.stringify(theDinos));
+    destroy(id) {
+        console.log(id)
+        let theDinos = this.props.dinosaurs.filter(dinosaur => dinosaur.id !== id)
+        localStorage.setItem("dinoStorage", JSON.stringify(theDinos));
     }
 
     render() {

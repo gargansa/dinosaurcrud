@@ -6,14 +6,12 @@ import './App.css';
 import DinoDelete from './DinoDelete'; //not
 
 export default class App extends Component {
-  destroy(id) {
-    let theDinos = this.props.dinosaurs.filter(dinosaur => dinosaur.id !== id)
-    localStorage.setItem("dinoStorage", JSON.stringify(theDinos));
-  }
+  
   render() {
     let dinosaurs = [];
+    
     dinosaurs = JSON.parse(localStorage.getItem("dinoStorage"));
-    if (!dinosaurs) {
+    if (dinosaurs.length===0) {
       dinosaurs = [
         { id: 0, name: 'Parasaurolophus', height: '16ft', weight: '2268 kg', era: 'Late Cretaceous', diet: 'Herbivore' },
         {id: 1, name: 'Brachiosaurus', height:'31ft', weight:'35000 kg', era: 'Late Jurassic', diet:'Herbivore'},
