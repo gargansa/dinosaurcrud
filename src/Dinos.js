@@ -30,6 +30,15 @@ export default class Dinos extends React.Component {
         this.editDino = this.editDino.bind(this);
     } // ends constructor 
 
+    //Used for Edit and Create
+    handleChange(event) {
+        const name = event.target.name;
+        this.setState({
+            [name]: event.target.value
+        });
+    }
+
+    //Create functions
     componentDidMount() {
         let initialDinosaurs = []
         initialDinosaurs = JSON.parse(localStorage.getItem("dinoStorage"));
@@ -54,6 +63,7 @@ export default class Dinos extends React.Component {
         }
         this.setState({ dinosaurs: initialDinosaurs })
     }
+
     submitCreate(event) {
         event.preventDefault();
         let currentId = 0;
@@ -68,31 +78,32 @@ export default class Dinos extends React.Component {
         localStorage.setItem("dinoStorage", JSON.stringify(theDinos));
     }
 
+    //Delete Functions
     deleteDino(name) {
         let newDinos = this.state.dinosaurs.filter(dinosaur => dinosaur.name !== name)
         this.setState({ dinosaurs: newDinos })
         localStorage.setItem("dinoStorage", JSON.stringify(newDinos));
     }
+
+    //Edit Functions
     editDino(dino) {
         this.setState({ dinoToEdit: dino })
-
     }
-
-
 
     submitEdit(event) {
         event.preventDefault()
         //BUILD UPDATED DINOSAUR
         let updatedDino = {
-            id: this.id,
-            name: this.name.length ? this.name : this.state.name,
-            height: this.height.length ? this.height : this.state.height,
-            weight: this.weight.length ? this.weight : this.state.weight,
-            era: this.era.length ? this.era : this.state.era,
-            diet: this.diet.length ? this.diet : this.state.diet
+            id: this.props.dino.id,
+            name:this.state.name.length ? this.state.name : this.props.dino.name ,
+            height:this.state.height.length ? this.state.height : this.props.dino.height ,
+            weight:this.state.weight.length ? this.state.weight : this.props.dino.weight ,
+            era:this.state.era.length ? this.state.era : this.props.dino.era ,
+            diet:this.state.diet.length ? this.state.diet : this.props.dino.diet
         }
         this.updateDino(updatedDino)
     }
+
     updateDino(newDino) {
         let newDinoObj = this.state.dinosaurs.map((oldDino) => {
             if (oldDino.id === newDino.id) {
@@ -105,12 +116,9 @@ export default class Dinos extends React.Component {
         this.setState({ dinosaurs: newDinoObj })
         localStorage.setItem("dinoStorage", JSON.stringify(newDinoObj));
     }
-    handleChange(event) {
-        const name = event.target.name;
-        this.setState({
-            [name]: event.target.value
-        });
-    }
+
+
+    //Display Functions
     displayEditDinos() {
         return (
             <Form>
@@ -138,8 +146,10 @@ export default class Dinos extends React.Component {
                     <Label for="dinoDiet">Diet</Label>
                     <Input type="text" defaultValue={this.diet} name="diet" id="dinoDiet" onChange={this.handleChange} />
                 </FormGroup>
+                <Button onClick={this.submitEdit}>Submit Edit</Button>
             </Form>)
     }
+
     displayReadDinos() {
         return (
             this.dinoNames = this.state.dinosaurs.map((item) =>
@@ -152,33 +162,34 @@ export default class Dinos extends React.Component {
     }
 
     displayCreateDinos() {
-        return(
-        <Form>
-            <FormGroup>
-                <Label for="dinoName">Name of Dino</Label>
-                <Input type="text" name="name" id="dinoName" defaultValue="Spinosaurus" onChange={this.handleChange} />
-            </FormGroup>
+        return (
+            <Form>
+                <FormGroup>
+                    <Label for="dinoName">Name of Dino</Label>
+                    <Input type="text" name="name" id="dinoName" defaultValue="Spinosaurus" onChange={this.handleChange} />
+                </FormGroup>
 
-            <FormGroup>
-                <Label for="dinoHeight">Height</Label>
-                <Input type="text" name="height" id="dinoHeight" defaultValue="11 ft" onChange={this.handleChange} />
-            </FormGroup>
+                <FormGroup>
+                    <Label for="dinoHeight">Height</Label>
+                    <Input type="text" name="height" id="dinoHeight" defaultValue="11 ft" onChange={this.handleChange} />
+                </FormGroup>
 
-            <FormGroup>
-                <Label for="dinoWeight">Weight</Label>
-                <Input type="text" name="weight" id="dinoWeight" defaultValue="1000 kg" onChange={this.handleChange} />
-            </FormGroup>
+                <FormGroup>
+                    <Label for="dinoWeight">Weight</Label>
+                    <Input type="text" name="weight" id="dinoWeight" defaultValue="1000 kg" onChange={this.handleChange} />
+                </FormGroup>
 
-            <FormGroup>
-                <Label for="dinoEra">Era</Label>
-                <Input type="text" name="era" id="dinoEra" defaultValue="Late Jurassic" onChange={this.handleChange} />
-            </FormGroup>
+                <FormGroup>
+                    <Label for="dinoEra">Era</Label>
+                    <Input type="text" name="era" id="dinoEra" defaultValue="Late Jurassic" onChange={this.handleChange} />
+                </FormGroup>
 
-            <FormGroup>
-                <Label for="dinoDiet">Diet</Label>
-                <Input type="text" name="diet" id="dinoDiet" defaultValue="Mostly Beats" onChange={this.handleChange} />
-            </FormGroup>   
-        </Form>
+                <FormGroup>
+                    <Label for="dinoDiet">Diet</Label>
+                    <Input type="text" name="diet" id="dinoDiet" defaultValue="Mostly Beats" onChange={this.handleChange} />
+                </FormGroup>
+                <Button onClick={this.submitCreate}>Submit Create</Button>
+            </Form>
         )
     }
 
@@ -192,12 +203,10 @@ export default class Dinos extends React.Component {
                         </Col>
                         <Col> <h1>Edit</h1>
                             {this.displayEditDinos()}
-                            <Button onClick={this.submitEdit}>Submit Edit</Button>
-
+                            
                         </Col>
                         <Col><h1>Create</h1>
                             {this.displayCreateDinos()}
-                            <Button onClick={this.submitCreate}>Submit Create</Button>
                         </Col>
                     </Row>
                 </Container>

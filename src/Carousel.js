@@ -93,7 +93,7 @@ class DinoSlides extends Component {
           key={item.src}
         >
           <img src={item.src} alt={item.altText} />
-      <CarouselCaption color="brown" captionHeader={item.caption} />
+      <CarouselCaption captionText="" color="brown" captionHeader={item.caption} />
         </CarouselItem>
       );
     });
