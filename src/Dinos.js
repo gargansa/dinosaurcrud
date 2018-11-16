@@ -1,7 +1,11 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-
+// import Navigation from './Navbar.js'
 import { Container, Row, Col } from 'reactstrap';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import CreateDinoForm from './CreateDinoForm.js';
+import DisplayDinoForm from './DisplayDinoForm.js';
+
 export default class Dinos extends React.Component {
     constructor() {
         super()
@@ -36,17 +40,17 @@ export default class Dinos extends React.Component {
         let name = event.target.name;
         this.setState({
             [name]: event.target.value
-        });  
+        });
     }
     //display via alert
-    readDino(item){
-        alert(    
-        "ID: " + item.id +"\n" + 
-        "Name: " + item.name +"\n" +
-        "Height: " + item.height +"\n" +
-        "Weight: " + item.weight +"\n" +
-        "Era: " + item.era +"\n" +
-        "Diet: " + item.diet
+    readDino(item) {
+        alert(
+            "ID: " + item.id + "\n" +
+            "Name: " + item.name + "\n" +
+            "Height: " + item.height + "\n" +
+            "Weight: " + item.weight + "\n" +
+            "Era: " + item.era + "\n" +
+            "Diet: " + item.diet
         )
     }
     //Create functions
@@ -87,7 +91,7 @@ export default class Dinos extends React.Component {
         theDinos.push(dummyDino)
         this.setState({ dinosaurs: theDinos })
         localStorage.setItem("dinoStorage", JSON.stringify(theDinos));
-        
+
     }
 
     //Delete Functions
@@ -106,31 +110,32 @@ export default class Dinos extends React.Component {
     submitEdit(event) {
         event.preventDefault()
         //BUILD UPDATED DINOSAUR
-        
+
         let updatedDino = {
             id: this.state.dinoToEdit.id,
-            name:this.state.name.length ? this.state.name:this.state.dinoToEdit.name,
-            height:this.state.height.length ? this.state.height:this.state.dinoToEdit.height,
-            weight:this.state.weight.length ? this.state.weight:this.state.dinoToEdit.weight,
-            era:this.state.era.length ? this.state.era:this.state.dinoToEdit.era,
-            diet:this.state.diet.length ? this.state.diet:this.state.dinoToEdit.diet
+            name: this.state.name.length ? this.state.name : this.state.dinoToEdit.name,
+            height: this.state.height.length ? this.state.height : this.state.dinoToEdit.height,
+            weight: this.state.weight.length ? this.state.weight : this.state.dinoToEdit.weight,
+            era: this.state.era.length ? this.state.era : this.state.dinoToEdit.era,
+            diet: this.state.diet.length ? this.state.diet : this.state.dinoToEdit.diet
         }
         this.updateDino(updatedDino)
-        this.setState({ dinoToEdit: {
-            id: -1,
+        this.setState({
+            dinoToEdit: {
+                id: -1,
+                name: "",
+                height: "",
+                weight: "",
+                era: "",
+                diet: "",
+            },
             name: "",
             height: "",
             weight: "",
             era: "",
             diet: "",
-        },
-        name: "",
-        height: "",
-        weight: "",
-        era: "",
-        diet: "",
-        //reset the name 
-    })
+            //reset the name 
+        })
     }
 
     updateDino(newDino) {
@@ -184,66 +189,44 @@ export default class Dinos extends React.Component {
             this.dinoNames = this.state.dinosaurs.map((item) =>
                 <FormGroup key={item.id}>
                     <Row>
-                    <Label>{item.name}</Label>
+                        <Label>{item.name}</Label>
                     </Row>
                     <Row>
-                    <Button onClick={() => { this.readDino(item) }}>Read</Button>
-                    <Button onClick={() => { this.deleteDino(item.name) }}>Delete</Button>
-                    <Button onClick={() => { this.editDino(item) }}>Edit</Button>
+                        <Button onClick={() => { this.readDino(item) }}>Read</Button>
+                        <Button onClick={() => { this.deleteDino(item.name) }}>Delete</Button>
+                        <Button onClick={() => { this.editDino(item) }}>Edit</Button>
                     </Row>
                 </FormGroup>)
         )
     }
 
-    displayCreateDinos() {
-        return (
-            <Form>
-                <FormGroup>
-                    <Label for="dinoName">Name of Dino</Label>
-                    <Input type="text" name="name" id="dinoName" defaultValue="Spinosaurus" onChange={this.handleChange} />
-                </FormGroup>
-
-                <FormGroup>
-                    <Label for="dinoHeight">Height</Label>
-                    <Input type="text" name="height" id="dinoHeight" defaultValue="11 ft" onChange={this.handleChange} />
-                </FormGroup>
-
-                <FormGroup>
-                    <Label for="dinoWeight">Weight</Label>
-                    <Input type="text" name="weight" id="dinoWeight" defaultValue="1000 kg" onChange={this.handleChange} />
-                </FormGroup>
-
-                <FormGroup>
-                    <Label for="dinoEra">Era</Label>
-                    <Input type="text" name="era" id="dinoEra" defaultValue="Late Jurassic" onChange={this.handleChange} />
-                </FormGroup>
-
-                <FormGroup>
-                    <Label for="dinoDiet">Diet</Label>
-                    <Input type="text" name="diet" id="dinoDiet" defaultValue="Mostly Beats" onChange={this.handleChange} />
-                </FormGroup>
-                <Button onClick={this.submitCreate}>Submit Create</Button>
-            </Form>
-        )
-    }
-
     render() {
         return (
-            <div>
-                <Container>
-                    <Row>
-                        <Col> <h1>Read</h1>
-                            {this.displayReadDinos()}
-                        </Col>
-                        <Col> <h1>Edit</h1>
-                            {this.displayEditDinos()}
-                        </Col>
-                        <Col><h1>Create</h1>
-                            {this.displayCreateDinos()}
-                        </Col>
-                    </Row>
-                </Container>
-            </div>
+                <Router>
+                    <div>
+                        <ul>
+                            <li>
+                                <Link to="/display">DisplayDinos</Link>
+                            </li>
+                            <li>
+                                <Link to="/create">Create</Link>
+                            </li>
+                        </ul>
+
+                        <hr />
+
+                        {/* <Route exact path="/" component={this.displayReadDinos()} /> */}
+                        <Route path="/display" 
+                        render={()=><DisplayDinoForm
+                        dinosaurs={this.state.dinosaurs}
+                        dinoToEdit={this.state.dinoToEdit}
+                        handleChange={this.handleChange}
+                        />
+                        }
+                        />
+                        <Route path="/create" component={CreateDinoForm} />
+                    </div>
+                </Router>
         );
     }
 };
