@@ -65,8 +65,8 @@ export default class Dinos extends React.Component {
         )
     }
     
-    deleteDino(name) {
-        let newDinos = this.state.dinosaurs.filter(dinosaur => dinosaur.name !== name)
+    deleteDino(id) {
+        let newDinos = this.state.dinosaurs.filter(dinosaur => dinosaur.id !== id)
         this.setState({ dinosaurs: newDinos })
         localStorage.setItem("dinoStorage", JSON.stringify(newDinos));
     }

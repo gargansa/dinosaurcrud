@@ -48,7 +48,7 @@ export default class DisplayDinoForm extends React.Component {
                     </Row>
                     <Row>
                         <Button onClick={() => { this.props.readDino(item) }}>Read</Button>
-                        <Button onClick={() => { this.props.deleteDino(item.name) }}>Delete</Button>
+                        <Button onClick={() => { this.props.deleteDino(item.id) }}>Delete</Button>
                         <Button onClick={() => { this.props.editDino(item) }}>Edit</Button>
                     </Row>
                 </FormGroup>)
