@@ -5,12 +5,12 @@ export default class DisplayDinoForm extends React.Component {
     constructor(props) {
         super(props)
 
-
+        
     }
     //Display Functions
     displayEditDinos() {
         return (
-            <Form>
+            <Form ref="editForm">
                 <FormGroup>
                     <Label for="dinoName">Name of Dino</Label>
                     <Input type="text" defaultValue={this.props.dinoToEdit.name} name="name" id="dinoName" onChange={this.props.handleChange} />
@@ -38,7 +38,7 @@ export default class DisplayDinoForm extends React.Component {
                 <Button onClick={this.props.submitEdit}>Submit Edit</Button>
             </Form>)
     }
-
+    
     displayReadDinos() {
         return (
              this.props.dinosaurs.map((item) =>
@@ -57,11 +57,15 @@ export default class DisplayDinoForm extends React.Component {
     render() {
         return (
             <Row>
-                <Col md={6}>
+                <Col md={2}>
+                </Col>
+                <Col md={4}>
                     {this.displayReadDinos()}
                 </Col>
-                <Col md={6}>
+                <Col md={4}>
                     {this.displayEditDinos()}
+                </Col>
+                <Col md={2}>
                 </Col>
             </Row>
         )

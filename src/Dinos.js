@@ -96,9 +96,9 @@ export default class Dinos extends React.Component {
             currentId = this.state.dinosaurs[this.state.dinosaurs.length - 1].id
         }
 
-        let dummyDino = { id: currentId + 1, name: this.state.name, height: this.state.height, weight: this.state.weight, era: this.state.era, diet: this.state.diet }
+        let newDino = { id: currentId + 1, name: this.state.name, height: this.state.height, weight: this.state.weight, era: this.state.era, diet: this.state.diet }
         let theDinos = this.state.dinosaurs.slice()
-        theDinos.push(dummyDino)
+        theDinos.push(newDino)
         this.setState({ dinosaurs: theDinos })
         localStorage.setItem("dinoStorage", JSON.stringify(theDinos));
 
@@ -132,7 +132,9 @@ export default class Dinos extends React.Component {
             era: "",
             diet: "",
             //reset the name 
+            
         })
+        
     }
     
     componentDidMount() {

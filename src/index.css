@@ -12,15 +12,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-ul {
-  list-style-type: none;
-}
-
 h1{
-  color:rgb(155, 127, 255) !important;
+  color:rgb(113, 78, 241) !important;
 }
 img{
-  width: 400px;
-  /* height: 400px; */
+  width: 50%;
 }
