@@ -4,8 +4,6 @@ import { Row, Col } from 'reactstrap';
 export default class DisplayDinoForm extends React.Component {
     constructor(props) {
         super(props)
-
-        
     }
     //Display Functions
     displayEditDinos() {
@@ -36,12 +34,13 @@ export default class DisplayDinoForm extends React.Component {
                     <Input type="text" defaultValue={this.props.dinoToEdit.diet} name="diet" id="dinoDiet" onChange={this.props.handleChange} />
                 </FormGroup>
                 <Button onClick={this.props.submitEdit}>Submit Edit</Button>
-            </Form>)
+                </Form>
+            )
     }
-    
+
     displayReadDinos() {
         return (
-             this.props.dinosaurs.map((item) =>
+                this.props.dinosaurs.map((item) =>
                 <FormGroup key={item.id}>
                     <Row>
                         <Label>{item.name}</Label>

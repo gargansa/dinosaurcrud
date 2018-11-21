@@ -42,7 +42,6 @@ export default class Dinos extends React.Component {
         this.deleteDino = this.deleteDino.bind(this);
         this.editDino = this.editDino.bind(this);
         this.updateDino = this.updateDino.bind(this);
-        this.updateDino = this.updateDino.bind(this);
         this.submitEdit = this.submitEdit.bind(this);
         this.submitCreate = this.submitCreate.bind(this);
     }
@@ -201,10 +200,11 @@ export default class Dinos extends React.Component {
 
                     <Route exact path="/" component={DinoSlides} />
 
-                    <Route exact path="/display"
+                    <Route path="/display"
                         render={() => <DisplayDinoForm
                             dinosaurs={this.state.dinosaurs}
                             dinoToEdit={this.state.dinoToEdit}
+
                             handleChange={this.handleChange}
                             readDino={this.readDino}
                             deleteDino={this.deleteDino}
@@ -213,9 +213,10 @@ export default class Dinos extends React.Component {
                             submitEdit={this.submitEdit}
                         />}
                     />
-                    <Route exact path="/create" 
+                    <Route path="/create" 
                         render={() => <CreateDinoForm
                         dinosaurs={this.state.dinosaurs}
+                        
                         handleChange={this.handleChange}
                         submitCreate={this.submitCreate}
                         />} 
